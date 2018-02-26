@@ -5,12 +5,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DkrMosTenders.Model
 {
-    public class District
+    public class Building
     {
         public int Id { get; set; }
+
+        [Required]
+        public virtual District District { get; set; }
+
         [Required(AllowEmptyStrings = false)]
-        public string FullName { get; set; }
-        [Required(AllowEmptyStrings = false), MaxLength(10)]
-        public string ShortName { get; set; }
+        public string Address { get; set; }
     }
 }

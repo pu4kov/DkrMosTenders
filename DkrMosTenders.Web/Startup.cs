@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using DkrMosTenders.Web.Models;
+using AutoMapper;
+using DkrMosTenders.Model;
 
 namespace DkrMosTenders.Web
 {
@@ -22,6 +26,30 @@ namespace DkrMosTenders.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDbContext<TendersContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("TendersContext")));
+
+            var config = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Tender, TenderSummaryViewModel>()
+                    .ForMember(vm => vm.Number,
+                        o => o.MapFrom(t => t.DkrNumber))
+                    .ForMember(vm => vm.Price,
+                        o => o.MapFrom(t => t.MaxPrice))
+                    .ForMember(vm => vm.Districts,
+                        o => o.MapFrom(t => t.Objects
+                            .GroupBy(tt => tt.Building.District)
+                            .Select(d => d.Key.ShortName)))
+                    .ForMember(vm => vm.Addresses,
+                        o => o.MapFrom(t => t.Objects
+                            .Select(b => b.Building.Address)))
+                    .ForMember(vm => vm.Price,
+                        o => o.MapFrom(t => t.MaxPrice));
+            });
+            var mapper = config.CreateMapper();
+
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,7 +62,7 @@ namespace DkrMosTenders.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Tenders/Error");
             }
 
             app.UseStaticFiles();
@@ -43,7 +71,7 @@ namespace DkrMosTenders.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Tenders}/{action=Index}");
             });
         }
     }

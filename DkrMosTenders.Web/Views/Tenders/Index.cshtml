@@ -1,0 +1,67 @@
+﻿@model IEnumerable<TenderSummaryViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<header>Конкурсы, проводимые ДКР города Москвы</header>
+<!--
+<form asp-action="Tenders" asp-controller="Home" data-ajax-method="GET">
+    <div class="search-block">
+        <div class="search-text">
+            <input asp-for="SearchQuery" class="search-text-input" type="text" placeholder="Поиск" />
+            <div class="adv-search-btn-block">
+                <a class="btn-adv-search" href="#">Расширенный поиск<b class="caret"></b></a>
+            </div>
+        </div>
+        <div class="adv-search-block">
+            <div class="form-group">
+                <label class="control-label">Начальная цена:</label>
+                <input asp-for="PriceFrom" type="number" id="price_from" placeholder="с" />
+                <span>&mdash;</span>
+                <input asp-for="PriceTo" type="number" id="price_to" placeholder="по" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Дата окончания подачи заявок:</label>
+                <input type="date" id="date_from" placeholder="не ранее" />
+                <span>&mdash;</span>
+                <input type="date" id="date_to" placeholder="не позже" />
+            </div>
+        </div>
+        <div class="search-button">
+            <input id="search" class="btn-search" type="submit" value="Найти" />
+        </div>
+    </div>
+</form>
+-->
+
+<div class="btn-toolbar" role="toolbar">
+    <a class="btn btn-outline-light" asp-controller="Tenders" asp-action="Create">Добавить тендер</a>
+</div>
+
+<table class="table table-hover">
+    <tbody>
+    @if (Model != null)
+    {
+        @foreach (var tender in Model)
+        {
+            <tr>
+                <td>
+                    <div class="tenders-number">
+                        <a asp-controller="Tenders" asp-action="Edit" asp-route-id="@tender.Id">@tender.Number</a>
+                    </div>
+                    <div class="tenders-name">
+                        <a asp-controller="Tenders" asp-action="Edit" asp-route-id="@tender.Id">@tender.FullName</a>
+                    </div>
+                </td>
+                <td>
+                    <div>@string.Join(",", tender.Districts)</div>
+                    <div>@string.Join(",", tender.Addresses)</div>
+                </td>
+                <td class="text-right">
+                    <div>@tender.Price.ToString("C")</div>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

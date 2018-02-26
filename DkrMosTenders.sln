@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DkrMosTenders.Model", "DkrMosTenders.Model\DkrMosTenders.Model.csproj", "{BFC82797-F2CB-41A1-ADF5-7271477841C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DkrMosTenders.Model", "DkrMosTenders.Model\DkrMosTenders.Model.csproj", "{BFC82797-F2CB-41A1-ADF5-7271477841C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DkrMosTenders.Web", "DkrMosTenders.Web\DkrMosTenders.Web.csproj", "{13F9CFAB-D3FC-423E-86E8-CB8DF57B9D3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DkrMosTenders.Web", "DkrMosTenders.Web\DkrMosTenders.Web.csproj", "{13F9CFAB-D3FC-423E-86E8-CB8DF57B9D3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

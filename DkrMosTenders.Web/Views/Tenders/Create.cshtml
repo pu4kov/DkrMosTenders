@@ -1,0 +1,19 @@
+﻿@model AddOrEditTenderViewModel
+
+<form>
+    <div class="form-group">
+        @Html.LabelFor(t => t.Tender.DkrNumber, "Номер тендера ДКР")
+        @Html.EditorFor(t => t.Tender.DkrNumber)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(t => t.Tender.EtpNumber, "Номер тендера ЭТП")
+        @Html.EditorFor(t => t.Tender.EtpNumber)
+    </div>
+    <div class="form-group">
+        <label for="idFullName">Наименование</label>
+        <textarea asp-for="Tender.FullName" rows="4" id="idFullName"></textarea>
+    </div>
+
+    <input type="submit" class="btn" value="Добавить" />
+    <input type="button" class="btn" value="Отменить" />
+</form>
