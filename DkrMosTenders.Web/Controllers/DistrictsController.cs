@@ -30,7 +30,7 @@ namespace DkrMosTenders.Web.Controllers
         public IActionResult VerifyShortName(string shortName)
         {
             var district = DbContext.Districts.Where(d => d.ShortName.ToUpper() == shortName.ToUpper()).FirstOrDefault();
-            if (district == null)
+            if (district != null)
             {
                 return Json($"District \"{shortName}\" already exists");
             }
